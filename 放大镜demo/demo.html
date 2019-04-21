@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <link rel="icon" href="img/favicon.ico" type="img/x-ico">
+
+    <style type="text/css">
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        img{
+            display: block;
+        }
+        
+        .leftcon{
+            float: left;
+            width: 350px;
+            height: 350px;
+            margin: 100px 20px 0 312px;
+            -webkit-box-shadow: 3px 3px 10px 0 #111111;  /*兼容性处理*/
+            -moz-box-shadow: 3px 3px 10px 0 #111111;
+            position: relative;
+        }
+
+        .leftcon img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .leftcon .slide_box {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 175px;
+            height: 175px;
+            background: #000;
+            opacity: 0.3;
+            cursor: move;
+        }
+
+        .rightcon {
+            display: none;
+            float: left;
+            width: 350px;
+            height: 350px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rightcon img {
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="leftcon" id="left">
+        <img src="img/风景-111.jpeg" alt="">
+        <div class="slide_box" id="box"></div>
+    </div>
+    <div class="rightcon" id="right">
+        <img src="img/风景-111.jpeg" alt="">
+    </div>
+</body>
+<script>
+    var leftone = document.getElementById('left');
+    var rightone = document.getElementById('right');
+    var box = document.getElementById('box');
+    var rimg = rightone.getElementsByTagName('img')[0];
+
+
+    function getPosition(e) {
+
+        var e = e || window.event; //实现兼容
+
+        var top = e.clientY - leftone.offsetTop - box.offsetHeight / 2;
+        var left = e.clientX - leftone.offsetLeft - box.offsetWidth / 2;
+
+        var maxtop = leftone.offsetHeight - box.offsetHeight;
+        var maxleft = leftone.offsetWidth - box.offsetWidth;
+        var mintop = 0;
+        var minleft = 0;
+        var mvtop;
+        var mvleft;
+
+        if(top < mintop) {
+            box.style.top = mintop + 'px';
+            mvtop = mintop;
+        }else if(top > maxtop) {
+            box.style.top = maxtop + 'px';
+            mvtop = maxtop;
+        }else {
+            box.style.top = top + 'px';
+            mvtop = top;
+        }
+
+        if(left < minleft) {
+            box.style.left = minleft + 'px';
+            mvleft = minleft;
+        }else if(left > maxleft) {
+            box.style.left = maxleft + 'px';
+            mvleft = maxleft;
+        }else {
+            box.style.left = left + 'px';
+            mvleft = left;
+        }
+
+        rimg.style.top = -mvtop*2 + 'px';
+        rimg.style.left = -mvleft*2 + 'px';
+    }
+
+    leftone.onmousemove = function(e) {
+        var e = e || window.event;
+        box.style.display = 'block';
+        rightone.style.display = 'block';
+        getPosition(e);
+    }
+
+    leftone.onmouseleave = function(e) {
+        var e = e || window.event;
+        box.style.display = 'none';
+        rightone.style.display = 'none';
+    }
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+</html>
