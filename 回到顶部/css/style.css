@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    background-color: lightblue;
+}
+
+.text {
+    width: 940px;
+    margin: 50px auto;
+    border: 2px solid slategray;
+    padding: 5px;
+    box-shadow: 2px 2px 0 #888888;
+}
+
+#back-to-top {
+    /* display: none; */
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    cursor: pointer;
+}
